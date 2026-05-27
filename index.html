@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Creeks Vintage Garage Decor | Burkes Pass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #0b0b0d;
+    --cream: #f8f5f0;
+    --accent: #c8870a;
+    --accent-light: #e09b1a;
+    --charcoal: #1a1a1f;
+    --mid: #2c2c34;
+    --text-muted: #9a9090;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* LOADER */
+  #loader {
+    position: fixed;
+    inset: 0;
+    background: var(--dark);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  #loader.hidden { opacity: 0; visibility: hidden; }
+  #loader-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  #loader-bar-wrap {
+    width: 220px;
+    height: 2px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  #loader-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 2px;
+    animation: loaderFill 1.2s ease forwards;
+  }
+  @keyframes loaderFill {
+    to { width: 100%; }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 20px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(11,11,13,0.96);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.4);
+    padding: 14px 5%;
+  }
+  .nav-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(11,11,13,0.98);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--accent); }
+  .mobile-close {
+    position: absolute;
+    top: 24px; right: 5%;
+    font-size: 2rem;
+    color: var(--white);
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.04);
+    transition: transform 8s ease;
+  }
+  .hero-bg.loaded { transform: scale(1); }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(11,11,13,0.82) 0%, rgba(11,11,13,0.55) 60%, rgba(200,135,10,0.18) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 8%;
+    max-width: 780px;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1.5px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5.2rem);
+    font-weight: 700;
+    line-height: 1.02;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 1.12rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.65;
+    margin-bottom: 36px;
+    max-width: 520px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dark);
+    background: var(--accent);
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200,135,10,0.38);
+  }
+  .btn-outline {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: transparent;
+    padding: 13px 32px;
+    border-radius: 4px;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover {
+    border-color: var(--accent);
+    background: rgba(200,135,10,0.12);
+    transform: translateY(-2px);
+  }
+  .hero-badges {
+    position: absolute;
+    bottom: 40px;
+    right: 8%;
+    display: flex;
+    gap: 20px;
+    z-index: 2;
+  }
+  .badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 12px 18px;
+    text-align: center;
+  }
+  .badge-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .badge-label {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    background: var(--accent);
+    padding: 14px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 28s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .marquee-track span {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dark);
+    padding: 0 32px;
+  }
+  .marquee-track span::after {
+    content: '//';
+    margin-left: 32px;
+    opacity: 0.4;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTION HELPERS */
+  section { padding: 96px 8%; }
+  .section-tag {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--accent);
+  }
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+
+  /* ABOUT / INTRO */
+  .about-section {
+    background: var(--dark);
+    color: var(--white);
+    clip-path: polygon(0 0, 100% 48px, 100% 100%, 0 100%);
+    padding-top: 120px;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-wrap img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+  .about-img-accent {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    width: 180px;
+    height: 180px;
+    border: 3px solid var(--accent);
+    border-radius: 8px;
+    z-index: -1;
+  }
+  .about-section h2 { color: var(--white); margin-bottom: 24px; }
+  .about-section p {
+    font-size: 1.05rem;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.72);
+    margin-bottom: 18px;
+  }
+  .about-stats {
+    display: flex;
+    gap: 36px;
+    margin-top: 36px;
+  }
+  .stat { border-left: 2px solid var(--accent); padding-left: 16px; }
+  .stat-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* SERVICES */
+  .services-section { background: var(--cream); }
+  .services-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: end;
+    margin-bottom: 60px;
+  }
+  .services-intro p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #555;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service-card {
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    padding: 36px 28px;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.1);
+    border-color: rgba(200,135,10,0.18);
+  }
+  .service-icon {
+    font-size: 2.2rem;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .service-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .service-card p {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: #666;
+  }
+
+  /* GALLERY */
+  .gallery-section {
+    background: var(--charcoal);
+    padding: 96px 0;
+    clip-path: polygon(0 48px, 100% 0, 100% calc(100% - 48px), 0 100%);
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+  .gallery-inner { padding: 0 8%; }
+  .gallery-section .section-tag { color: var(--accent); }
+  .gallery-section h2 { color: var(--white); margin-bottom: 48px; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 260px 260px;
+    gap: 16px;
+  }
+  .gallery-item {
+    overflow: hidden;
+    border-radius: 8px;
+    position: relative;
+  }
+  .gallery-item:first-child {
+    grid-row: 1 / 3;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+  .gallery-item:hover img { transform: scale(1.06); }
+  .gallery-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(11,11,13,0.6) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+  }
+  .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+  .gallery-item-overlay span {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* CREDENTIALS */
+  .creds-section {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+    min-height: 560px;
+  }
+  .creds-image {
+    position: relative;
+    overflow: hidden;
+  }
+  .creds-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .creds-content {
+    background: var(--dark);
+    padding: 88px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .creds-content h2 { color: var(--white); margin-bottom: 24px; }
+  .creds-content p {
+    font-size: 1.02rem;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 16px;
+  }
+  .creds-list {
+    list-style: none;
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .creds-list li {
+    font-size: 0.93rem;
+    color: rgba(255,255,255,0.75);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .creds-list li::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* REVIEWS */
+  .reviews-section { background: var(--cream); }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .review-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 32px 28px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+  }
+  .review-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 16px;
+  }
+  .star { color: var(--accent); font-size: 1rem; }
+  .review-text {
+    font-size: 0.97rem;
+    line-height: 1.72;
+    color: #444;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .review-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark);
+    flex-shrink: 0;
+  }
+  .review-name {
+    font-weight: 600;
+    font-size: 0.93rem;
+    color: var(--dark);
+  }
+  .review-meta {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .reviews-cta {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--dark);
+    clip-path: polygon(0 48px, 100% 0, 100% 100%, 0 100%);
+    padding-top: 128px;
+  }
+  .contact-section .section-tag { color: var(--accent); }
+  .contact-section h2 { color: var(--white); margin-bottom: 12px; }
+  .contact-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    margin-top: 60px;
+    align-items: start;
+  }
+  .contact-info { color: rgba(255,255,255,0.7); }
+  .contact-info p {
+    font-size: 1.02rem;
+    line-height: 1.78;
+    margin-bottom: 36px;
+  }
+  .contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .contact-detail-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(200,135,10,0.15);
+    border: 1px solid rgba(200,135,10,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .contact-detail-text span {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+  .contact-detail-text a, .contact-detail-text p {
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    font-size: 0.97rem;
+    margin: 0;
+    transition: color 0.2s;
+  }
+  .contact-detail-text a:hover { color: var(--accent); }
+
+  /* FORM */
+  .contact-form {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 44px 40px;
+    backdrop-filter: blur(8px);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 8px;
+    padding: 13px 16px;
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.97rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+  .form-group select option { background: var(--charcoal); color: var(--white); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    background: rgba(200,135,10,0.07);
+  }
+  .form-group textarea { resize: vertical; min-height: 130px; }
+  .form-submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--accent);
+    color: var(--dark);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .form-submit-btn:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200,135,10,0.3);
+  }
+  .form-submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top-color: var(--dark);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 36px 20px;
+  }
+  .form-success .success-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+  }
+  .form-success h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .form-success p { color: rgba(255,255,255,0.65); font-size: 0.97rem; }
+
+  /* FOOTER */
+  footer {
+    background: #000;
+    padding: 72px 8% 36px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 56px;
+    margin-bottom: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-brand-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+  }
+  .footer-brand-name span { color: var(--accent); }
+  .footer-desc {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 24px;
+  }
+  .footer-col h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--white); }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-bottom p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.3);
+  }
+  .footer-bottom a { color: rgba(255,255,255,0.3); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .stagger-1 { transition-delay: 0.08s; }
+  .stagger-2 { transition-delay: 0.18s; }
+  .stagger-3 { transition-delay: 0.28s; }
+  .stagger-4 { transition-delay: 0.38s; }
+  .stagger-5 { transition-delay: 0.48s; }
+  .stagger-6 { transition-delay: 0.58s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .gallery-item:first-child { grid-row: auto; }
+    .about-grid { gap: 48px; }
+  }
+  @media (max-width: 768px) {
+    section { padding: 72px 6%; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-badges { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-img-wrap { order: -1; }
+    .about-img-wrap img { height: 340px; }
+    .services-intro { grid-template-columns: 1fr; gap: 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .gallery-item { height: 240px; }
+    .creds-section { grid-template-columns: 1fr; }
+    .creds-image { height: 320px; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .contact-intro { grid-template-columns: 1fr; gap: 48px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .form-row { grid-template-columns: 1fr; }
+    .about-stats { flex-wrap: wrap; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div id="loader-name">Three Creeks</div>
+  <div id="loader-bar-wrap"><div id="loader-bar"></div></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Three <span>Creeks</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Visit Us</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="openMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMenu()">&#x2715;</button>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#collections" onclick="closeMenu()">Collections</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="#contact" onclick="closeMenu()">Visit Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Burkes Pass, Canterbury</div>
+    <h1>Vintage<br><span>Garage</span><br>Decor &amp; More</h1>
+    <p class="hero-sub">Petroliana, automotive collectibles, and rare garage art -- curated from New Zealand and beyond at Three Creeks.</p>
+    <div class="hero-ctas">
+      <a href="#collections" class="btn-primary">Explore Collections</a>
+      <a href="#contact" class="btn-outline">Plan Your Visit</a>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <div class="badge">
+      <div class="badge-num">30+</div>
+      <div class="badge-label">Years Collecting</div>
+    </div>
+    <div class="badge">
+      <div class="badge-num">100s</div>
+      <div class="badge-label">Unique Items</div>
+    </div>
+    <div class="badge">
+      <div class="badge-num">5&#9733;</div>
+      <div class="badge-label">Google Rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>Petroliana</span>
+    <span>Vintage Signage</span>
+    <span>Garage Art</span>
+    <span>Automotive Collectibles</span>
+    <span>Enamel Signs</span>
+    <span>Oil Cans &amp; Tins</span>
+    <span>Classic Car Memorabilia</span>
+    <span>Retro Workshop Decor</span>
+    <span>NZ &amp; International Finds</span>
+    <span>Events &amp; Private Viewings</span>
+    <span>Petroliana</span>
+    <span>Vintage Signage</span>
+    <span>Garage Art</span>
+    <span>Automotive Collectibles</span>
+    <span>Enamel Signs</span>
+    <span>Oil Cans &amp; Tins</span>
+    <span>Classic Car Memorabilia</span>
+    <span>Retro Workshop Decor</span>
+    <span>NZ &amp; International Finds</span>
+    <span>Events &amp; Private Viewings</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap fade-up">
+      <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80" alt="Vintage garage collectibles at Three Creeks">
+      <div class="about-img-accent"></div>
+    </div>
+    <div class="fade-up stagger-2">
+      <div class="section-tag">Our Story</div>
+      <h2>Where Petrol Culture Meets Passionate Collecting</h2>
+      <p>Tucked into the heart of Burkes Pass in the Mackenzie Country, Three Creeks Vintage Garage Decor is more than a shop -- it's a destination for anyone who loves the golden age of motoring and the art of the garage.</p>
+      <p>Dave Taylor has spent decades hunting down the finest petroliana, enamel signage, oil cans, vintage automotive artwork, and rare garage memorabilia from across New Zealand and around the world. Every piece in the collection tells a story.</p>
+      <p>Whether you're a serious collector hunting a specific piece, or you're simply looking for something to make your man-cave or classic car garage look the part -- Three Creeks is a place you won't want to leave in a hurry.</p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100s</div>
+          <div class="stat-label">Unique Pieces</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">NZ</div>
+          <div class="stat-label">Locally Loved</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES / COLLECTIONS -->
+<section class="services-section" id="collections">
+  <div class="services-intro">
+    <div class="fade-up">
+      <div class="section-tag">What We Stock</div>
+      <h2>The Collection</h2>
+    </div>
+    <div class="fade-up stagger-2">
+      <p>From authentic petroliana signs to one-of-a-kind garage art, the Three Creeks collection is always evolving. Drop in, browse, and find something you didn't know you needed.</p>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up stagger-1">
+      <span class="service-icon">⛽</span>
+      <h3>Petroliana</h3>
+      <p>Genuine vintage petrol signs, pump globes, oil tin displays, and fuel brand collectibles from NZ and international manufacturers. Rare finds constantly coming in.</p>
+    </div>
+    <div class="service-card fade-up stagger-2">
+      <span class="service-icon">🔧</span>
+      <h3>Garage Decor</h3>
+      <p>Transform your workshop or man-cave with authentic vintage garage decor -- enamel signs, antique tools, workshop clocks, and automotive art that brings real character.</p>
+    </div>
+    <div class="service-card fade-up stagger-3">
+      <span class="service-icon">🚗</span>
+      <h3>Automotive Collectibles</h3>
+      <p>Classic car memorabilia, vintage automobile parts for display, hood ornaments, badges, period accessories, and hard-to-find motoring curiosities.</p>
+    </div>
+    <div class="service-card fade-up stagger-4">
+      <span class="service-icon">🪧</span>
+      <h3>Vintage Signage</h3>
+      <p>Enamel, tin, and porcelain signs spanning every era of New Zealand and international automotive and commercial history. Display-ready and authentically aged.</p>
+    </div>
+    <div class="service-card fade-up stagger-5">
+      <span class="service-icon">🎪</span>
+      <h3>Events &amp; Venue</h3>
+      <p>Three Creeks is available for private viewings, car club gatherings, collector events, and themed functions. Contact Dave to discuss what's possible on the property.</p>
+    </div>
+    <div class="service-card fade-up stagger-6">
+      <span class="service-icon">🔍</span>
+      <h3>Sourcing &amp; Enquiries</h3>
+      <p>Looking for something specific? Dave has an extensive network across New Zealand and can often source hard-to-find petroliana and vintage garage pieces on request.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-inner">
+    <div class="fade-up">
+      <div class="section-tag">Gallery</div>
+      <h2>The Finds</h2>
+    </div>
+    <div class="gallery-grid" style="margin-top: 48px;">
+      <div class="gallery-item fade-up stagger-1">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Vintage petroliana collection at Three Creeks">
+        <div class="gallery-item-overlay"><span>Petroliana</span></div>
+      </div>
+      <div class="gallery-item fade-up stagger-2">
+        <img src="https://images.unsplash.com/photo-1600661653561-629509216228?w=600&q=80" alt="Vintage enamel garage signs">
+        <div class="gallery-item-overlay"><span>Enamel Signs</span></div>
+      </div>
+      <div class="gallery-item fade-up stagger-3">
+        <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=600&q=80" alt="Classic car memorabilia">
+        <div class="gallery-item-overlay"><span>Automotive Art</span></div>
+      </div>
+      <div class="gallery-item fade-up stagger-4">
+        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600&q=80" alt="Vintage workshop decor">
+        <div class="gallery-item-overlay"><span>Workshop Decor</span></div>
+      </div>
+      <div class="gallery-item fade-up stagger-5">
+        <img src="https://images.unsplash.com/photo-1612825173281-9a193378527e?w=600&q=80" alt="Classic motoring collectibles">
+        <div class="gallery-item-overlay"><span>Collectibles</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="creds-section" id="story" style="padding: 0;">
+  <div class="creds-image">
+    <img src="https://images.unsplash.com/photo-1596566953662-61e4e97c76e2?w=900&q=80" alt="Burkes Pass Mackenzie Country landscape">
+  </div>
+  <div class="creds-content">
+    <div class="section-tag" style="margin-bottom: 12px;">Burkes Pass, Mackenzie Country</div>
+    <h2>A Destination in Every Sense</h2>
+    <p>Three Creeks sits in one of the most scenic corridors in New Zealand -- the road through Burkes Pass that connects Christchurch to the Mackenzie Basin, Tekapo, and beyond. Every year, thousands of travellers pass through this gateway to the high country.</p>
+    <p>Dave Taylor has turned a lifelong passion for motoring history into one of New Zealand's most unique retail experiences. The property is as much a museum as a shop -- a living, breathing archive of petrol culture and garage heritage.</p>
+    <ul class="creds-list">
+      <li>Decades of specialist collecting knowledge</li>
+      <li>Constantly refreshed stock from NZ and overseas</li>
+      <li>Located on the main tourist route through Burkes Pass</li>
+      <li>Perfect stopping point for car clubs and touring groups</li>
+      <li>Private viewings and events available on request</li>
+    </ul>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews" style="padding-top: 96px;">
+  <div class="fade-up" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px;">
+    <div>
+      <div class="section-tag">What Visitors Say</div>
+      <h2>Customer Reviews</h2>
+    </div>
+    <a href="review.html" class="btn-primary" style="margin-bottom: 4px;">Leave a Review</a>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-up stagger-1">
+      <div class="review-stars">
+        <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+      </div>
+      <p class="review-text">"Absolutely incredible place -- stopped in on the way to Tekapo and stayed for over two hours. Dave's knowledge of petroliana is extraordinary and the collection is genuinely one-of-a-kind. Found a vintage Shell sign I'd been hunting for years."</p>
+      <div class="review-author">
+        <div class="review-avatar">MB</div>
+        <div>
+          <div class="review-name">Mark B.</div>
+          <div class="review-meta">Collector, Christchurch</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-up stagger-2">
+      <div class="review-stars">
+        <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+      </div>
+      <p class="review-text">"Our car club made this a compulsory stop on our Mackenzie run and we weren't disappointed. The garage memorabilia is superb and Dave is great to talk to. This is a hidden gem that every petrol head needs to visit."</p>
+      <div class="review-author">
+        <div class="review-avatar">TW</div>
+        <div>
+          <div class="review-name">Tony W.</div>
+          <div class="review-meta">Car Club Member, Timaru</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-up stagger-3">
+      <div class="review-stars">
+        <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+      </div>
+      <p class="review-text">"I bought a beautiful collection of vintage enamel signs for my workshop and couldn't be happier. The quality is real and the provenance is genuine. Three Creeks is the kind of place you tell everyone about."</p>
+      <div class="review-author">
+        <div class="review-avatar">SC</div>
+        <div>
+          <div class="review-name">Simon C.</div>
+          <div class="review-meta">Classic Car Enthusiast, Dunedin</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-cta">
+    <a href="review.html" class="btn-outline" style="border-color: var(--accent); color: var(--accent);">Share Your Experience</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="fade-up">
+    <div class="section-tag">Get In Touch</div>
+    <h2>Plan Your Visit</h2>
+  </div>
+  <div class="contact-intro">
+    <div class="contact-info fade-up stagger-1">
+      <p>Whether you're planning a visit, looking for a specific piece, or want to discuss hosting an event at Three Creeks -- get in touch with Dave directly.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div class="contact-detail-text">
+          <span>Phone</span>
+          <a href="tel:036858544">03 685 8544</a>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📧</div>
+        <div class="contact-detail-text">
+          <span>Email</span>
+          <a href="mailto:3creeks@xtra.co.nz">3creeks@xtra.co.nz</a>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text">
+          <span>Location</span>
+          <p>Burkes Pass, Canterbury, New Zealand</p>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">🕐</div>
+        <div class="contact-detail-text">
+          <span>Hours</span>
+          <p>Open most days -- call ahead to confirm</p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form fade-up stagger-2">
+      <div id="formSuccess" class="form-success">
+        <div class="success-icon">&#10003;</div>
+        <h3>Message Sent!</h3>
+        <p>Thanks for reaching out. Dave will be in touch shortly.</p>
+      </div>
+      <form id="contactForm" action="https://api.staticforms.xyz/submit" method="post">
+        <input type="hidden" name="apiKey" value="sf_768da8d33927e7f4f241d0a6">
+        <input type="hidden" name="redirectTo" value="https://three-creeks-vintage-garage-decor-demo.vercel.app/?sent=1#contact">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="firstName" placeholder="Dave" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="lastName" placeholder="Taylor" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="you@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone (optional)</label>
+          <input type="text" name="phone" placeholder="Your phone number">
+        </div>
+        <div class="form-group">
+          <label>Reason for Enquiry</label>
+          <select name="service" required>
+            <option value="" disabled selected>Select an option</option>
+            <option>Planning a Visit</option>
+            <option>Looking for a Specific Item</option>
+            <option>Petroliana Enquiry</option>
+            <option>Vintage Signage Enquiry</option>
+            <option>Automotive Collectibles</option>
+            <option>Event / Private Viewing</option>
+            <option>Buying or Selling</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Message</label>
+          <textarea name="message" placeholder="Tell us what you're after or when you're planning to visit..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit-btn" id="submitBtn">
+          <span id="btnText">Send Enquiry</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Three <span>Creeks</span></div>
+      <p class="footer-desc">Vintage garage decor, petroliana, and automotive collectibles in the heart of Burkes Pass, Canterbury. A destination for collectors and petrol heads alike.</p>
+      <p style="font-size: 0.85rem; color: rgba(255,255,255,0.3);">Burkes Pass, Canterbury, New Zealand</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#about">About Three Creeks</a></li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact &amp; Visit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:036858544">03 685 8544</a></li>
+        <li><a href="mailto:3creeks@xtra.co.nz">3creeks@xtra.co.nz</a></li>
+        <li><a href="review.html">Leave a Review</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Three Creeks Vintage Garage Decor. All rights reserved.</p>
+    <p>Built by <a href="https://scaleds.co.nz" target="_blank">Scaled Solutions</a></p>
+  </div>
+</footer>
+
+<script>
+  // Loader
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+      document.getElementById('heroBg').classList.add('loaded');
+    }, 1350);
+  });
+
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  function openMenu() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+
+  // Intersection Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Contact form
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const spinner = document.getElementById('spinner');
+  const btnText = document.getElementById('btnText');
+  const formSuccess = document.getElementById('formSuccess');
+
+  // Check for ?sent=1
+  if (new URLSearchParams(window.location.search).get('sent') === '1') {
+    form.style.display = 'none';
+    formSuccess.style.display = 'block';
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      submitBtn.disabled = true;
+      spinner.style.display = 'block';
+      btnText.textContent = 'Sending...';
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        spinner.style.display = 'none';
+        btnText.textContent = 'Send Enquiry';
+      }, 20000);
+    });
+  }
+</script>
+</body>
+</html>
